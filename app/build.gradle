@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.fernandobarbosa.novoimpriogarrison_501stlegion"
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary= true
+    }
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            buildConfigField "boolean", "DEVELOPER_MODE", "true"
+            buildConfigField("String", "URL_API", '"http://www.501st.com/api/garrisons/104"')
+            buildConfigField("String", "URL_API_MEMBERS", '"http://www.501st.com/api/garrisons/104/members"')
+            testCoverageEnabled true
+        }
+        release {
+            buildConfigField "boolean", "DEVELOPER_MODE", "false"
+            buildConfigField("String", "URL_API", '"https://portalapi.stone.com.br/"')
+            buildConfigField("String", "URL_API_MEMBERS", '"http://www.501st.com/api/garrisons/104/members"')
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:support-vector-drawable:26.1.0'
+
+    compile "com.squareup.retrofit2:retrofit:$retrofit_version"
+    compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    testCompile "org.robolectric:robolectric:3.6.1"
+}
